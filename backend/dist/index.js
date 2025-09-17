@@ -15,9 +15,36 @@ const portfolio_1 = __importDefault(require("./routes/portfolio"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 8080;
-// Security middleware
+// Security middleware - Configure Helmet for Angular SPA
 app.use((0, helmet_1.default)({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "https://fonts.googleapis.com",
+                "https://unicons.iconscout.com",
+                "https://unpkg.com",
+                "https://cdn.jsdelivr.net"
+            ],
+            scriptSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "'unsafe-eval'",
+                "https://cdnjs.cloudflare.com",
+                "https://cdn.jsdelivr.net"
+            ],
+            fontSrc: [
+                "'self'",
+                "https://fonts.gstatic.com",
+                "https://fonts.googleapis.com"
+            ],
+            imgSrc: ["'self'", "data:", "https:", "http:"],
+            connectSrc: ["'self'"]
+        }
+    }
 }));
 // CORS configuration - Allow multiple origins for development and production
 const allowedOrigins = [
