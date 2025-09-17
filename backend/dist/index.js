@@ -88,8 +88,8 @@ app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
 // Static file serving for uploads
 app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '../uploads')));
-// Serve Angular static files
-app.use(express_1.default.static(path_1.default.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser')));
+// Serve static portfolio files
+app.use(express_1.default.static(path_1.default.join(__dirname, '../../static-portfolio')));
 // API routes
 app.use('/api/upload', upload_1.default);
 app.use('/api/portfolio', portfolio_1.default);
@@ -109,9 +109,9 @@ app.use((err, req, res, next) => {
         message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
     });
 });
-// Catch-all handler: send back Angular's index.html file for SPA routing
+// Catch-all handler: send back static portfolio index.html
 app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser/index.html'));
+    res.sendFile(path_1.default.join(__dirname, '../../static-portfolio/index.html'));
 });
 // 404 handler for API routes only
 app.use('/api/*', (req, res) => {

@@ -95,8 +95,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static file serving for uploads
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// Serve Angular static files
-app.use(express.static(path.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser')));
+// Serve static portfolio files
+app.use(express.static(path.join(__dirname, '../../static-portfolio')));
 
 // API routes
 app.use('/api/upload', uploadRoutes);
@@ -120,9 +120,9 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// Catch-all handler: send back Angular's index.html file for SPA routing
+// Catch-all handler: send back static portfolio index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser/index.html'));
+  res.sendFile(path.join(__dirname, '../../static-portfolio/index.html'));
 });
 
 // 404 handler for API routes only
