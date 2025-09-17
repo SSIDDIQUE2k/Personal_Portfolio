@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   profile: SiteContent;
   scrolled = false;
 
-  constructor(private router: Router, private contentService: ContentService) {
+  constructor(public router: Router, private contentService: ContentService) {
     // Load content from ContentService
     this.profile = this.contentService.load();
     
