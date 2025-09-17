@@ -12,18 +12,19 @@ import portfolioRoutes from './routes/portfolio';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Security middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
-// CORS configuration - Allow multiple origins for development
+// CORS configuration - Allow multiple origins for development and production
 const allowedOrigins = [
   'http://localhost:4200',
   'http://localhost:52885',
   'http://localhost:57893',
+  'https://personalportfolio-production-24b0.up.railway.app',
   process.env.CORS_ORIGIN
 ].filter(Boolean);
 
@@ -31,6 +32,18 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+    
+    // In production, be more permissive for Railway deployment
+    if (process.env.NODE_ENV === 'production') {
+      // Allow Railway domains
+      if (origin.includes('.railway.app') || origin.includes('.up.railway.app')) {
+        return callback(null, true);
+      }
+      // Allow same-origin requests (when frontend and backend are served from same domain)
+      if (!origin || origin === process.env.RAILWAY_PUBLIC_DOMAIN) {
+        return callback(null, true);
+      }
+    }
     
     if (allowedOrigins.some(allowedOrigin => allowedOrigin && origin.startsWith(allowedOrigin))) {
       return callback(null, true);
@@ -41,6 +54,7 @@ app.use(cors({
       return callback(null, true);
     }
     
+    console.log('CORS blocked origin:', origin);
     const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
     return callback(new Error(msg), false);
   },

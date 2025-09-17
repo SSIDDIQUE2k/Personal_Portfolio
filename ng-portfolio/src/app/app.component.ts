@@ -2,7 +2,7 @@ import { Component, HostListener, AfterViewInit, ViewChild, ElementRef, OnDestro
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs';
 import { ContentService, SiteContent, Project } from './core/content.service';
 import { ContactComponent } from './sections/contact/contact.component';
 

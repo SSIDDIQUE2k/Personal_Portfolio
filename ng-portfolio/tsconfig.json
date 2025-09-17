@@ -16,7 +16,17 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom",
+      "dom.iterable"
+    ],
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
