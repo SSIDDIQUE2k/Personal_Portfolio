@@ -1,0 +1,29 @@
+.ai-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1050;
+  .btn { width: 3rem; height: 3rem; display: grid; place-items: center; }
+}
+
+.ai-panel {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 5rem;
+  width: min(360px, 92vw);
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--fg);
+  z-index: 1049;
+
+  .card-header { color: var(--fg); }
+  .history { overflow: auto; padding-right: .25rem; }
+  .msg { display: flex; margin-bottom: .5rem; }
+  .msg.user { justify-content: flex-end; }
+  .bubble { max-width: 80%; padding: .5rem .75rem; border-radius: .75rem; }
+  .msg.user .bubble { color: #fff; }
+  .msg.ai .bubble { border: 1px solid #2a3057; }
+}
+

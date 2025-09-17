@@ -1,0 +1,24 @@
+<div class="ai-toggle">
+  <button class="btn btn-primary rounded-circle shadow" (click)="toggle()" aria-label="Open AI Assistant">
+    <i class="bi" [ngClass]="open ? 'bi-x-lg' : 'bi-stars' "></i>
+  </button>
+</div>
+
+<div class="ai-panel card shadow-lg border-0" [@panel]="open ? 'open' : 'closed'">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="fw-semibold">AI Assistant</div>
+    <button class="btn btn-sm btn-outline-light" (click)="toggle()">Close</button>
+  </div>
+  <div class="card-body d-flex flex-column gap-2">
+    <div class="history flex-grow-1">
+      <div *ngFor="let m of history" class="msg" [ngClass]="m.from">
+        <div class="bubble">{{ m.text }}</div>
+      </div>
+    </div>
+    <form class="d-flex gap-2" (ngSubmit)="send()">
+      <input class="form-control" [(ngModel)]="input" name="msg" placeholder="Ask about projects, pricing, AWS…" />
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>
+</div>
+

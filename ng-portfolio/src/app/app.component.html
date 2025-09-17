@@ -1,0 +1,567 @@
+<!-- Show router outlet for admin, portfolio content otherwise -->
+<div *ngIf="isAdminRoute">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Show portfolio content only for main route -->
+<div *ngIf="!isAdminRoute">
+
+<!-- Enhanced Morphing background shapes -->
+<div class="morphing-bg">
+  <div class="morph-shape morph-1"></div>
+  <div class="morph-shape morph-2"></div>
+  <div class="morph-shape morph-3"></div>
+</div>
+
+<!-- Starfield Animation -->
+<div class="starfield">
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+</div>
+
+<div class="nav-toggle" id="nav-toggle" (click)="toggleSidebar()">
+  <i class="uil uil-bars"></i>
+</div>
+
+<aside class="sidebar" id="sidebar" [class.show-sidebar]="sidebarOpen">
+  <nav class="nav">
+    <div class="nav-logo">
+      <a href="#home" class="nav-logo-text" (click)="setActiveSection('home')">M</a>
+    </div>
+
+    <div class="nav-menu">
+      <div class="menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link" [class.active-link]="activeSection === 'home'" (click)="setActiveSection('home')">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link" [class.active-link]="activeSection === 'about'" (click)="setActiveSection('about')">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link" [class.active-link]="activeSection === 'skills'" (click)="setActiveSection('skills')">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a href="#work" class="nav-link" [class.active-link]="activeSection === 'work'" (click)="setActiveSection('work')">Work</a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" [class.active-link]="activeSection === 'services'" (click)="setActiveSection('services')">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link" [class.active-link]="activeSection === 'contact'" (click)="setActiveSection('contact')">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-share">
+      <i class="uil uil-share-alt social-share"></i>
+    </div>
+
+    <div class="nav-close" id="nav-close" (click)="closeSidebar()">
+      <i class="uil uil-times"></i>
+    </div>
+  </nav>
+</aside>
+
+<main class="main">
+  <section class="home" id="home" [ngStyle]="getBackgroundStyle()">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <!-- Particle System -->
+    <div class="particle-system">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Social Links (Fixed Position) -->
+    <div class="home-social hero-animate-social">
+      <span class="home-social-follow">FOLLOW</span>
+      <div class="home-social-links">
+        <a href="https://www.facebook.com" target="_blank" class="home-social-link">
+          <i class="uil uil-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="home-social-link">
+          <i class="uil uil-instagram"></i>
+        </a>
+        <a href="https://www.x.com" target="_blank" class="home-social-link">
+          <i class="uil uil-twitter"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="home-container container grid">
+      <!-- Left Content -->
+      <div class="home-content-left">
+        <div class="home-data">
+          <h1 class="home-title">
+            <span class="word word-1">Hi,</span> 
+            <span class="word word-2">I'm</span> 
+            <span class="name-highlight word word-3">{{profile.name}}</span>
+          </h1>
+          <h3 class="home-subtitle">
+            <span class="word word-4">{{profile.role}}</span>
+          </h3>
+          <p class="home-description">
+            <span class="word word-5">{{profile.bio}}</span>
+          </p>
+          <a href="#about" class="button word word-6">
+            <i class="uil uil-user button-icon"></i>
+            More About me
+          </a>
+        </div>
+
+        <div class="my-info">
+          <div class="info-item">
+            <i class="uil uil-facebook-messenger info-icon"></i>
+            <div>
+              <div class="info-title">Messenger</div>
+              <div class="info-subtitle">{{profile.messenger}}</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="uil uil-whatsapp info-icon"></i>
+            <div>
+              <div class="info-title">WhatsApp</div>
+              <div class="info-subtitle">{{profile.phone}}</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="uil uil-envelope-edit info-icon"></i>
+            <div>
+              <div class="info-title">Email</div>
+              <div class="info-subtitle">{{profile.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="home-img-container">
+        <div class="profile-frame">
+          <img [src]="getProfileImageWithFallback()" alt="{{profile.name}}" class="home-img-big hero-animate-image" 
+               [class.placeholder-image]="getProfileImageWithFallback() === '/placeholder.svg'">
+          <div class="image-overlay" *ngIf="getProfileImageWithFallback() === '/placeholder.svg'">
+            <div class="upload-hint">
+              <i class="uil uil-camera-plus"></i>
+              <p>Upload your photo in Admin Panel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debug: Refresh button (temporary) -->
+    <div class="debug-controls" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+      <button (click)="refreshContent()" style="background: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+        🔄 Refresh Content
+      </button>
+    </div>
+  </section>
+
+  <section class="about section" id="about">
+    <h2 class="section-title animate-title" data-heading="My Intro">About me</h2>
+    
+    <div class="about-container container grid">
+      <!-- Left: Profile Image -->
+      <div class="about-img-container animate-slide-left">
+        <img [src]="getProfileImageWithFallback()" alt="{{profile.name}}" class="about-img">
+      </div>
+
+      <!-- Right: Content -->
+      <div class="about-data animate-slide-right">
+        <h3 class="about-heading animate-text-up">{{profile.about.title}}</h3>
+        <p class="about-description animate-text-fade">{{profile.about.description}}</p>
+
+        <div class="about-info animate-boxes">
+          <div class="about-box animate-box-1">
+            <i class="uil uil-award about-icon animate-icon"></i>
+            <h3 class="about-title">Experience</h3>
+            <span class="about-subtitle">{{profile.about.experienceYears}} Years</span>
+          </div>
+          
+          <div class="about-box animate-box-2">
+            <i class="uil uil-suitcase-alt about-icon animate-icon"></i>
+            <h3 class="about-title">Projects</h3>
+            <span class="about-subtitle">{{profile.about.projectsCompleted}} Completed</span>
+          </div>
+          
+          <div class="about-box animate-box-3">
+            <i class="uil uil-headphones-alt about-icon animate-icon"></i>
+            <h3 class="about-title">Support</h3>
+            <span class="about-subtitle">{{profile.about.supportAvailability}}</span>
+          </div>
+        </div>
+
+        <a href="#contact" class="button animate-button">
+          <i class="uil uil-navigator button-icon"></i>Contact me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualification section">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <h2 class="section-title" data-heading="My Journey">Qualifications</h2>
+
+    <div class="qualification-container container grid">
+      <div class="education">
+        <h3 class="qualification-title">
+          <i class="uil uil-graduation-cap"></i>Education
+        </h3>
+
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let edu of profile.education">
+            <div class="circle-dot"></div>
+            <h3 class="timeline-title">{{edu.title}}</h3>
+            <p class="timeline-text">{{edu.text}}</p>
+            <span class="timeline-date">
+              <i class="uil uil-calendar-alt"></i>{{edu.date}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience">
+        <h3 class="qualification-title">
+          <i class="uil uil-suitcase"></i>Experience
+        </h3>
+
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let exp of profile.experience">
+            <div class="circle-dot"></div>
+            <h3 class="timeline-title">{{exp.title}}</h3>
+            <p class="timeline-text">{{exp.text}}</p>
+            <span class="timeline-date">
+              <i class="uil uil-calendar-alt"></i>{{exp.date}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills section" id="skills">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <h2 class="section-title" data-heading="My Abilities">My Experience</h2>
+
+    <div class="skills-container container grid">
+      <div class="skills-tabs">
+        <div class="skills-header" 
+             [class.skills-active]="activeSkillTab === 'frontend'" 
+             (click)="setActiveSkillTab('frontend')">
+          <i class="uil uil-brackets-curly skills-icon"></i>
+          <div>
+            <h1 class="skills-title">Frontend Developer</h1>
+            <span class="skills-subtitle">More than 4 years</span>
+          </div>
+          <i class="uil uil-angle-down skills-arrow"></i>
+        </div>
+
+        <div class="skills-header" 
+             [class.skills-active]="activeSkillTab === 'design'" 
+             (click)="setActiveSkillTab('design')">
+          <i class="uil uil-swatchbook skills-icon"></i>
+          <div>
+            <h1 class="skills-title">UI / UX Design</h1>
+            <span class="skills-subtitle">More than 5 years</span>
+          </div>
+          <i class="uil uil-angle-down skills-arrow"></i>
+        </div>
+
+        <div class="skills-header" 
+             [class.skills-active]="activeSkillTab === 'backend'" 
+             (click)="setActiveSkillTab('backend')">
+          <i class="uil uil-server-network skills-icon"></i>
+          <div>
+            <h1 class="skills-title">Backend Developer</h1>
+            <span class="skills-subtitle">More than 2 years</span>
+          </div>
+          <i class="uil uil-angle-down skills-arrow"></i>
+        </div>
+      </div>
+
+      <div class="skills-content">
+        <div class="skills-group" 
+             [class.skills-active]="activeSkillTab === 'frontend'" 
+             *ngIf="activeSkillTab === 'frontend'">
+          <div class="skills-list grid">
+            <div class="skills-data" *ngFor="let skill of getFrontendSkills()">
+              <div class="skills-titles">
+                <h3 class="skills-name">{{skill.name}}</h3>
+                <span class="skills-number">{{skill.percent}}%</span>
+              </div>
+              <div class="skills-bar">
+                <span class="skills-percentage" [style.width.%]="skill.percent"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-group" 
+             [class.skills-active]="activeSkillTab === 'design'" 
+             *ngIf="activeSkillTab === 'design'">
+          <div class="skills-list grid">
+            <div class="skills-data" *ngFor="let skill of getDesignSkills()">
+              <div class="skills-titles">
+                <h3 class="skills-name">{{skill.name}}</h3>
+                <span class="skills-number">{{skill.percent}}%</span>
+              </div>
+              <div class="skills-bar">
+                <span class="skills-percentage" [style.width.%]="skill.percent"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-group" 
+             [class.skills-active]="activeSkillTab === 'backend'" 
+             *ngIf="activeSkillTab === 'backend'">
+          <div class="skills-list grid">
+            <div class="skills-data" *ngFor="let skill of getBackendSkills()">
+              <div class="skills-titles">
+                <h3 class="skills-name">{{skill.name}}</h3>
+                <span class="skills-number">{{skill.percent}}%</span>
+              </div>
+              <div class="skills-bar">
+                <span class="skills-percentage" [style.width.%]="skill.percent"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work section" id="work">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <h2 class="section-title" data-heading="My Portfolio">Recent Works</h2>
+
+    <div class="work-filters">
+      <span class="work-item" 
+            [class.active-work]="activeWorkFilter === 'all'" 
+            (click)="setWorkFilter('all')">All</span>
+      <span class="work-item" 
+            [class.active-work]="activeWorkFilter === 'web'" 
+            (click)="setWorkFilter('web')">Web</span>
+      <span class="work-item" 
+            [class.active-work]="activeWorkFilter === 'app'" 
+            (click)="setWorkFilter('app')">App</span>
+      <span class="work-item" 
+            [class.active-work]="activeWorkFilter === 'design'" 
+            (click)="setWorkFilter('design')">Design</span>
+    </div>
+
+    <div class="work-container container grid" #workContainer>
+      <div class="work-card mix {{project.category}}" *ngFor="let project of filteredProjects" [attr.data-category]="project.category">
+        <img [src]="project.image" alt="" class="work-img">
+        <h3 class="work-title">{{project.title}}</h3>
+        <span class="work-button" (click)="openPortfolioPopup(project)">
+          Demo<i class="uil uil-arrow-right work-button-icon"></i>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Popup -->
+  <div class="portfolio-popup" [class.open]="portfolioPopupOpen">
+    <div class="portfolio-popup-inner">
+      <div class="portfolio-popup-content grid">
+        <span class="portfolio-popup-close" (click)="closePortfolioPopup()">
+          <i class="uil uil-times"></i>
+        </span>
+        <div class="pp-thumbnail">
+          <img [src]="selectedProject?.image" alt="" class="portfolio-popup-img">
+        </div>
+
+        <div class="portfolio-popup-info">
+          <div class="portfolio-popup-subtitle">Featured - <span>{{selectedProject?.category}}</span></div>
+          <div class="portfolio-popup-body">
+            <h3 class="details-title">{{selectedProject?.detailsTitle}}</h3>
+            <p class="details-description">{{selectedProject?.detailsDescription}}</p>
+            <ul class="details-info">
+              <li>Created - <span>{{selectedProject?.created}}</span></li>
+              <li>Technologies - <span>{{selectedProject?.technologies}}</span></li>
+              <li>Role - <span>{{selectedProject?.role}}</span></li>
+              <li>View - <span><a [href]="selectedProject?.demoUrl">{{selectedProject?.demoUrl}}</a></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="services section" id="services">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <h2 class="section-title" data-heading="Services">What I Offer</h2>
+
+    <div class="services-container container grid">
+      <div class="services-content" *ngFor="let service of profile.services; let i = index">
+        <div>
+          <i class="{{service.icon}} services-icon"></i>
+          <h3 class="services-title">{{service.title}}</h3>
+        </div>
+
+        <span class="services-button" (click)="openServiceModal(i)">
+          View More <i class="uil uil-arrow-right services-button-icon"></i>
+        </span>
+
+        <div class="services-modal" [class.active-modal]="activeServiceModal === i">
+          <div class="services-modal-content">
+            <i class="uil uil-times services-modal-close" (click)="closeServiceModal()"></i>
+
+            <h3 class="services-modal-title">{{service.title}}</h3>
+            <p class="services-modal-description">Service capabilities and offerings</p>
+
+            <ul class="services-modal-services grid">
+              <li class="services-modal-service" *ngFor="let bullet of service.bullets">
+                <i class="uil uil-check-circle services-modal-icon"></i>
+                <p class="services-modal-info">{{bullet}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials section">
+    <!-- Enhanced Floating Background Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="shape shape-7"></div>
+      <div class="shape shape-8"></div>
+    </div>
+
+    <h2 class="section-title" data-heading="My clients say">Testimonials</h2>
+
+    <div class="testimonials-container container swiper" #testimonialsSwiper>
+      <div class="swiper-wrapper">
+        <div class="testimonial-card swiper-slide" *ngFor="let testimonial of profile.testimonials">
+          <div class="testimonial-quote">
+            <i class='bx bxs-quote-alt-left'></i>
+          </div>
+          <p class="testimonial-description">{{testimonial.quote}}</p>
+          <h3 class="testimonial-date">{{testimonial.date}}</h3>
+          <div class="testimonial-profile">
+            <img [src]="testimonial.image" alt="" class="testimonial-profile-img">
+            <div class="testimonial-profile-data">
+              <span class="testimonial-profile-name">{{testimonial.name}}</span>
+              <span class="testimonail-profile-detail">{{testimonial.role}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Modern Contact Section -->
+  <app-contact></app-contact>
+
+  <footer class="footer">
+    <div class="footer-bg">
+      <div class="footer-container container grid">
+        <div>
+          <h1 class="footer-title">{{profile.name}}</h1>
+          <span class="footer-subtitle">{{profile.role}}</span>
+        </div>
+
+        <ul class="footer-links">
+          <li>
+            <a href="#services" class="footer-links">Services</a>
+          </li>
+          <li>
+            <a href="#work" class="footer-links">Work</a>
+          </li>
+          <li>
+            <a href="#contact" class="footer-links">Contact</a>
+          </li>
+        </ul>
+
+        <div class="footer-socials">
+          <a href="https://www.facebook.com" target="_blank" class="footer-social">
+            <i class="uil uil-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" class="footer-social">
+            <i class="uil uil-instagram"></i>
+          </a>
+          <a href="https://www.x.com" target="_blank" class="footer-social">
+            <i class="uil uil-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-copy">&#169; <a href="https://codepen.io/leonam-silva-de-souza">ULTRA CODE</a>. All rights reserved</p>
+    </div>
+  </footer>
+</main>
+</div> <!-- End portfolio wrapper -->

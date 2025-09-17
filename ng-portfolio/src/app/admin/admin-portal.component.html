@@ -1,0 +1,839 @@
+<!-- Clean Vertical Admin Dashboard -->
+<div class="admin-wrap">
+  
+  <!-- Enhanced Admin Background -->
+  <div class="admin-background">
+    <!-- Floating Shapes -->
+    <div class="admin-floating-shapes">
+      <div class="admin-shape admin-shape-1"></div>
+      <div class="admin-shape admin-shape-2"></div>
+      <div class="admin-shape admin-shape-3"></div>
+      <div class="admin-shape admin-shape-4"></div>
+      <div class="admin-shape admin-shape-5"></div>
+    </div>
+    
+    <!-- Morphing Shapes -->
+    <div class="admin-morph-shapes">
+      <div class="admin-morph admin-morph-1"></div>
+      <div class="admin-morph admin-morph-2"></div>
+      <div class="admin-morph admin-morph-3"></div>
+    </div>
+  </div>
+
+  <!-- Admin Starfield Animation -->
+  <div class="admin-starfield">
+    <div id="admin-stars"></div>
+    <div id="admin-stars2"></div>
+  </div>
+  
+  <!-- Auth Screens -->
+  <ng-container *ngIf="step !== 'edit'">
+    <div class="auth-container">
+      
+      <!-- Setup Screen -->
+      <div *ngIf="step === 'set-secret'" class="auth-card">
+        <div class="auth-header">
+          <div class="auth-icon">🛡️</div>
+          <h1>Welcome to Portfolio CMS</h1>
+          <p>Create a secure password to protect your content management system</p>
+        </div>
+        
+        <form (ngSubmit)="setSecret()" class="auth-form">
+          <div class="form-group">
+            <label>Master Password</label>
+            <input 
+              type="password" 
+              [(ngModel)]="secret" 
+              name="newSecret" 
+              placeholder="Enter a strong password"
+              required>
+          </div>
+          
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input 
+              type="password" 
+              [(ngModel)]="confirm" 
+              name="confirm" 
+              placeholder="Confirm your password"
+              required>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="btn-primary"
+            [disabled]="!secret || secret !== confirm">
+            🚀 Setup Admin Access
+          </button>
+      </form>
+      </div>
+
+      <!-- Login Screen -->
+      <div *ngIf="step === 'login'" class="auth-card">
+        <div class="auth-header">
+          <div class="auth-icon">🔐</div>
+          <h1>Admin Login</h1>
+          <p>Enter your master password to continue</p>
+        </div>
+        
+        <form (ngSubmit)="login()" class="auth-form">
+          <div class="form-group">
+            <label>Master Password</label>
+            <input 
+              type="password" 
+              [(ngModel)]="secret" 
+              name="secret" 
+              placeholder="Enter your password"
+              required 
+              autofocus>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="btn-primary"
+            [disabled]="!secret">
+            🔓 Access Dashboard
+          </button>
+      </form>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Main Dashboard Interface -->
+  <ng-container *ngIf="step === 'edit'">
+    
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+      
+      <!-- Left Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <div class="logo-icon">📁</div>
+            <span class="logo-text">CMS&nbsp;ADMIN</span>
+          </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'overview'"
+            (click)="setActiveSection('overview')">
+            <i class="nav-icon">📊</i>
+            <span>Dashboard</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'personal'"
+            (click)="setActiveSection('personal')">
+            <i class="nav-icon">👤</i>
+            <span>Personal</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'about'"
+            (click)="setActiveSection('about')">
+            <i class="nav-icon">📝</i>
+            <span>About Me</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'skills'"
+            (click)="setActiveSection('skills')">
+            <i class="nav-icon">💻</i>
+            <span>Skills</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'projects'"
+            (click)="setActiveSection('projects')">
+            <i class="nav-icon">🚀</i>
+            <span>Projects</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'experience'"
+            (click)="setActiveSection('experience')">
+            <i class="nav-icon">💼</i>
+            <span>Experience</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'education'"
+            (click)="setActiveSection('education')">
+            <i class="nav-icon">🎓</i>
+            <span>Education</span>
+          </button>
+          <button 
+            class="nav-item" 
+            [class.active]="activeSection === 'services'"
+            (click)="setActiveSection('services')">
+            <i class="nav-icon">⚙️</i>
+            <span>Services</span>
+          </button>
+          
+          <div class="nav-divider"></div>
+          
+          <button class="nav-item" (click)="previewPortfolio()">
+            <i class="nav-icon">👁️</i>
+            <span>Preview</span>
+          </button>
+          <button class="nav-item" (click)="exportData()">
+            <i class="nav-icon">📥</i>
+            <span>Export</span>
+          </button>
+          <button class="nav-item" (click)="backupContent()">
+            <i class="nav-icon">🛡️</i>
+            <span>Backup</span>
+          </button>
+        </nav>
+      </div>
+      
+      <!-- Main Content Area -->
+      <div class="main-content">
+        
+        <!-- Top Header -->
+        <div class="top-header">
+          <div class="header-left">
+            <h1 class="page-title">{{getPageTitle()}}</h1>
+            <p class="page-subtitle">{{getPageSubtitle()}}</p>
+          </div>
+          <div class="header-right">
+            <button class="action-btn primary" (click)="save()" [class.saving]="saved">
+              <i class="btn-icon">💾</i>
+              {{saved ? 'Saved!' : 'Save Changes'}}
+            </button>
+          </div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="content-container">
+      
+          <!-- Dashboard Overview Section -->
+          <div class="content-section" *ngIf="activeSection === 'overview'">
+            
+            <!-- User Profile Cards Row -->
+            <div class="profile-cards-row">
+            <div class="profile-card main-profile">
+              <div class="profile-avatar" (click)="setActiveSection('personal')" title="Click to update profile image">
+                <img [src]="getProfileImageWithCache()" alt="Profile">
+                <div class="avatar-edit-overlay">
+                  <i class="edit-icon">📷</i>
+                </div>
+              </div>
+              <div class="profile-info">
+                <h3>{{content.name || 'Your Name'}}</h3>
+                <p>{{content.role || 'Your Role'}}</p>
+                <div class="profile-stats">
+                  <span class="stat">{{getProjectsCount()}} PROJ</span>
+                  <span class="stat">{{getSkillsCount()}} SKILLS</span>
+                </div>
+              </div>
+              <div class="profile-status">
+                <div class="status-indicator active"></div>
+                <span>Online</span>
+                <button class="quick-edit-btn" (click)="setActiveSection('personal')" title="Edit Profile">
+                  ✏️
+                </button>
+              </div>
+            </div>
+              
+              <div class="profile-card">
+                <div class="profile-avatar">
+                  <div class="avatar-placeholder">👥</div>
+                </div>
+                <div class="profile-info">
+                  <h3>Portfolio Views</h3>
+                  <p>This Month</p>
+                  <div class="profile-stats">
+                    <span class="stat">1.2K VIEWS</span>
+                    <span class="stat">+15% UP</span>
+                  </div>
+                </div>
+                <div class="profile-status">
+                  <div class="status-indicator progress"></div>
+                  <span>Growing</span>
+                </div>
+              </div>
+              
+              <div class="profile-card">
+                <div class="profile-avatar">
+                  <div class="avatar-placeholder">📈</div>
+                </div>
+                <div class="profile-info">
+                  <h3>Content Status</h3>
+                  <p>Portfolio Health</p>
+                  <div class="profile-stats">
+                    <span class="stat">95% COMPLETE</span>
+                    <span class="stat">{{getLastUpdated()}}D AGO</span>
+                  </div>
+                </div>
+                <div class="profile-status">
+                  <div class="status-indicator active"></div>
+                  <span>Healthy</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Task Management Section -->
+            <div class="task-section">
+              <div class="section-header">
+                <h3>Content Management Tasks</h3>
+                <div class="view-options">
+                  <button class="view-btn active">All</button>
+                  <button class="view-btn">In Progress</button>
+                  <button class="view-btn">Completed</button>
+                </div>
+              </div>
+              
+              <div class="task-list">
+                <div class="task-card" (click)="setActiveSection('personal')">
+                  <div class="task-info">
+                    <h4>Update Personal Information</h4>
+                    <p>Keep your profile and contact details current</p>
+                    <div class="task-tags">
+                      <span class="tag">Personal</span>
+                      <span class="tag priority">High Priority</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-circle">
+                      <div class="progress-bar" [style.width.%]="getPersonalCompleteness()"></div>
+                    </div>
+                    <span class="progress-text">{{getPersonalCompleteness()}}%</span>
+                  </div>
+                  <button class="task-action">CONTINUE</button>
+                </div>
+                
+                <div class="task-card" (click)="setActiveSection('projects')">
+                  <div class="task-info">
+                    <h4>Manage Projects Portfolio</h4>
+                    <p>Add, edit, and organize your project showcase</p>
+                    <div class="task-tags">
+                      <span class="tag">Portfolio</span>
+                      <span class="tag">Projects</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-circle">
+                      <div class="progress-bar" [style.width.%]="getProjectsCompleteness()"></div>
+                    </div>
+                    <span class="progress-text">{{getProjectsCompleteness()}}%</span>
+                  </div>
+                  <button class="task-action">CONTINUE</button>
+                </div>
+                
+                <div class="task-card" (click)="setActiveSection('skills')">
+                  <div class="task-info">
+                    <h4>Skills & Technologies</h4>
+                    <p>Update your technical skills and proficiency levels</p>
+                    <div class="task-tags">
+                      <span class="tag">Skills</span>
+                      <span class="tag">Technical</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-circle">
+                      <div class="progress-bar" [style.width.%]="getSkillsCompleteness()"></div>
+                    </div>
+                    <span class="progress-text">{{getSkillsCompleteness()}}%</span>
+                  </div>
+                  <button class="task-action">CONTINUE</button>
+                </div>
+                
+                <div class="task-card completed">
+                  <div class="task-info">
+                    <h4>Portfolio Setup Complete</h4>
+                    <p>Basic portfolio structure has been configured</p>
+                    <div class="task-tags">
+                      <span class="tag">Setup</span>
+                      <span class="tag completed">Completed</span>
+                    </div>
+                  </div>
+                  <div class="task-progress">
+                    <div class="progress-circle">
+                      <div class="progress-bar completed" style="width: 100%"></div>
+                    </div>
+                    <span class="progress-text">100%</span>
+                  </div>
+                  <button class="task-action completed">COMPLETED</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Information Section -->
+          <div class="content-section" *ngIf="activeSection === 'personal'">
+            <h2>👤 Personal Information</h2>
+            <p>Update your personal details and contact information</p>
+            
+            <form (ngSubmit)="save()" class="form-container">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input [(ngModel)]="content.name" name="name" placeholder="Your full name">
+                </div>
+                
+                <div class="form-group">
+                  <label>Professional Role</label>
+                  <input [(ngModel)]="content.role" name="role" placeholder="e.g. Full Stack Developer">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Location</label>
+                  <input [(ngModel)]="content.location" name="location" placeholder="City, Country">
+                </div>
+                
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" [(ngModel)]="content.email" name="email" placeholder="your@email.com">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input [(ngModel)]="content.phone" name="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                  <label>Messenger</label>
+                  <input [(ngModel)]="content.messenger" name="messenger" placeholder="@username">
+                </div>
+              </div>
+              
+              <div class="form-group full-width">
+                <label>Professional Bio</label>
+                <textarea [(ngModel)]="content.bio" name="bio" rows="4" placeholder="Write a compelling bio that showcases your expertise..."></textarea>
+              </div>
+              
+              <div class="form-group full-width">
+                <label>📸 Profile Picture</label>
+                
+                <!-- File Upload Option -->
+                <div style="margin-bottom: 15px; padding: 15px; border: 2px dashed #ddd; border-radius: 8px; text-align: center;">
+                  <h4 style="margin: 0 0 10px 0; color: #333;">📁 Upload from Computer</h4>
+                  <input 
+                    type="file" 
+                    id="profileImageFile" 
+                    accept="image/jpeg,image/png,image/gif,image/webp" 
+                    (change)="onFileSelected($event)"
+                    style="display: none;">
+                  <button 
+                    type="button" 
+                    (click)="triggerFileInput()" 
+                    [disabled]="uploadProgress.uploading"
+                    style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                    {{uploadProgress.uploading ? '⏳ Uploading...' : '📤 Choose Image File'}}
+                  </button>
+                  
+                  <!-- Upload Progress -->
+                  <div *ngIf="uploadProgress.uploading" style="margin-top: 10px;">
+                    <div style="background: #f3f4f6; border-radius: 10px; height: 20px; overflow: hidden;">
+                      <div style="background: #3b82f6; height: 100%; border-radius: 10px; transition: width 0.3s ease;" [style.width.%]="uploadProgress.progress"></div>
+                    </div>
+                    <small style="color: #666; margin-top: 5px; display: block;">{{uploadProgress.progress}}% uploaded</small>
+                  </div>
+                  
+                  <small style="color: #666; display: block; margin-top: 10px;">
+                    Supports: JPEG, PNG, GIF, WebP (Max 5MB)
+                  </small>
+                </div>
+
+                <!-- OR Divider -->
+                <div style="text-align: center; margin: 15px 0; position: relative;">
+                  <span style="background: white; padding: 0 15px; color: #666; font-weight: bold;">OR</span>
+                  <hr style="position: absolute; top: 50%; left: 0; right: 0; margin: 0; border: none; border-top: 1px solid #ddd; z-index: -1;">
+                </div>
+
+                <!-- URL Input Option -->
+                <div>
+                  <label>🔗 Enter Image URL</label>
+                  <input [(ngModel)]="content.profileImage" name="profileImage" placeholder="https://example.com/your-photo.jpg" (ngModelChange)="onImageUrlChange()">
+                  <small class="form-hint">
+                    💡 <strong>You can also paste an image URL from:</strong><br>
+                    • <a href="https://postimg.cc/" target="_blank">PostImg</a> • <a href="https://imgur.com/" target="_blank">Imgur</a> • <a href="https://cloudinary.com/" target="_blank">Cloudinary</a><br><br>
+                    ⚠️ <strong>Important:</strong> Local file paths (file://) won't work in browsers for security reasons.
+                  </small>
+                </div>
+                <div class="debug-info" *ngIf="showDebugInfo">
+                  <small><strong>Debug:</strong> Current URL: {{content.profileImage}}</small>
+                </div>
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                  <button type="button" (click)="testSave()" style="background: #f59e0b; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🧪 Test Save</button>
+                  <button type="button" (click)="resetToDefaults()" style="background: #dc2626; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔄 Reset to Defaults</button>
+                </div>
+                
+                <!-- Profile Image Preview -->
+                <div class="image-preview" *ngIf="content.profileImage">
+                  <div class="preview-label">Preview:</div>
+                  <img [src]="getProfileImageWithCache()" alt="Profile Preview" class="profile-preview" />
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label>🖼️ Background Image</label>
+                <input [(ngModel)]="content.backgroundImage" name="backgroundImage" placeholder="https://example.com/your-background.jpg">
+                <small class="form-hint">
+                  💡 <strong>Add a background image for your homepage:</strong><br>
+                  • Upload to <a href="https://postimg.cc/" target="_blank">PostImg</a> or <a href="https://imgur.com/" target="_blank">Imgur</a><br>
+                  • Or use any direct image URL (https://...)<br>
+                  • Leave empty for solid dark background
+                </small>
+                
+                <!-- Background Image Preview -->
+                <div class="image-preview" *ngIf="content.backgroundImage">
+                  <div class="preview-label">Background Preview:</div>
+                  <img [src]="content.backgroundImage" alt="Background Preview" class="background-preview" style="width: 100%; max-width: 400px; height: 200px; object-fit: cover; border-radius: 8px;" />
+                </div>
+              </div>
+              
+              <h3>🌐 Social Media Links</h3>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>📘 Facebook</label>
+                  <input [(ngModel)]="content.socials.facebook" name="facebook" placeholder="https://facebook.com/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                  <label>📸 Instagram</label>
+                  <input [(ngModel)]="content.socials.instagram" name="instagram" placeholder="https://instagram.com/yourprofile">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>🐦 Twitter</label>
+                  <input [(ngModel)]="content.socials.twitter" name="twitter" placeholder="https://twitter.com/yourhandle">
+                </div>
+                
+                <div class="form-group">
+                  <label>💼 LinkedIn</label>
+                  <input [(ngModel)]="content.socials.linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>💻 GitHub</label>
+                  <input [(ngModel)]="content.socials.github" name="github" placeholder="https://github.com/yourusername">
+                </div>
+                
+                <div class="form-group">
+                  <label>🎵 YouTube</label>
+                  <input [(ngModel)]="content.socials.youtube" name="youtube" placeholder="https://youtube.com/@yourchannel">
+                </div>
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">💾 Save Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- About Me Section -->
+          <div class="content-section" *ngIf="activeSection === 'about'">
+            <h2>📝 About Me Section</h2>
+            <p>Customize the content displayed in your About Me section</p>
+            
+            <form (ngSubmit)="save()" class="form-container">
+              <div class="form-group">
+                <label>About Section Title</label>
+                <input [(ngModel)]="content.about.title" name="aboutTitle" placeholder="e.g. Hi, I'm Your Name">
+                <small>This appears as the main heading in your About section</small>
+              </div>
+              
+              <div class="form-group">
+                <label>About Description</label>
+                <textarea [(ngModel)]="content.about.description" name="aboutDescription" 
+                          placeholder="Write a detailed description about yourself, your expertise, and what you do..."
+                          rows="4"></textarea>
+                <small>Describe your background, skills, and what makes you unique</small>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Experience Years</label>
+                  <input [(ngModel)]="content.about.experienceYears" name="experienceYears" placeholder="e.g. 5+">
+                  <small>Years of professional experience</small>
+                </div>
+                
+                <div class="form-group">
+                  <label>Projects Completed</label>
+                  <input [(ngModel)]="content.about.projectsCompleted" name="projectsCompleted" placeholder="e.g. 50+">
+                  <small>Number of projects you've completed</small>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Support Availability</label>
+                <input [(ngModel)]="content.about.supportAvailability" name="supportAvailability" placeholder="e.g. Online 24/7">
+                <small>Your availability or support hours</small>
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">💾 Save Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="content-section" *ngIf="activeSection === 'skills'">
+            <h2>💻 Skills & Technologies</h2>
+            <p>Organize your skills into categories with proficiency levels</p>
+            
+            <div class="skills-container">
+              <div class="skill-category" *ngFor="let category of content.skillsTabs; let categoryIndex = index">
+                <div class="category-header">
+                  <h3>{{category.title}}</h3>
+                  <button class="delete-btn" (click)="removeSkillCategory(categoryIndex)" title="Remove Category">🗑️</button>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Category Title</label>
+                    <input [(ngModel)]="category.title" name="skillCategoryTitle{{categoryIndex}}" placeholder="e.g. Frontend Development">
+                  </div>
+                  <div class="form-group">
+                    <label>Subtitle</label>
+                    <input [(ngModel)]="category.subtitle" name="skillCategorySubtitle{{categoryIndex}}" placeholder="e.g. More than 4 years">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Icon Class</label>
+                  <input [(ngModel)]="category.icon" name="skillCategoryIcon{{categoryIndex}}" placeholder="e.g. uil uil-brackets-curly">
+                </div>
+                
+                <h4>Skills in this category</h4>
+                <div class="skills-list">
+                  <div class="skill-item" *ngFor="let skill of category.items; let skillIndex = index">
+                    <div class="skill-row">
+                      <div class="form-group">
+                        <label>Skill Name</label>
+                        <input [(ngModel)]="skill.name" name="skillName{{categoryIndex}}{{skillIndex}}" placeholder="e.g. React">
+                      </div>
+                      <div class="form-group">
+                        <label>Proficiency %</label>
+                        <input type="number" min="0" max="100" [(ngModel)]="skill.percent" name="skillPercent{{categoryIndex}}{{skillIndex}}" placeholder="85">
+                      </div>
+                      <button class="delete-skill-btn" (click)="removeSkill(categoryIndex, skillIndex)" title="Remove Skill">❌</button>
+                    </div>
+                  </div>
+                  <button class="add-skill-btn" (click)="addSkill(categoryIndex)">➕ Add Skill</button>
+                </div>
+              </div>
+              
+              <div class="add-category-section">
+                <button class="btn-secondary" (click)="addSkillCategory()">➕ Add Skill Category</button>
+                <button class="btn-primary" (click)="save()">💾 Save Skills</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects Section -->
+          <div class="content-section" *ngIf="activeSection === 'projects'">
+            <h2>🚀 Portfolio Projects</h2>
+            <p>Showcase your best work with descriptions and technologies</p>
+            
+            <!-- Project Management Controls at Top -->
+            <div class="projects-top-controls">
+              <button class="btn-primary add-project-top" (click)="addProject()">➕ Add New Project</button>
+              <button class="btn-success save-projects-top" (click)="save()">💾 Save All Projects</button>
+            </div>
+            
+            <div class="projects-container">
+              <div class="project-item" *ngFor="let project of content.projects; let projectIndex = index">
+                <div class="project-header">
+                  <h3>Project {{projectIndex + 1}}: {{project.title || 'New Project'}}</h3>
+                  <button class="delete-btn" (click)="removeProject(projectIndex)" title="Remove Project">🗑️</button>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Project Title</label>
+                    <input [(ngModel)]="project.title" name="projectTitle{{projectIndex}}" placeholder="e.g. E-Commerce Platform">
+                  </div>
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select [(ngModel)]="project.category" name="projectCategory{{projectIndex}}">
+                      <option value="web">Web Development</option>
+                      <option value="app">Mobile App</option>
+                      <option value="design">Design</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Demo URL (optional)</label>
+                    <input [(ngModel)]="project.demoUrl" name="projectDemo{{projectIndex}}" placeholder="https://project-demo.com">
+                  </div>
+                  <div class="form-group">
+                    <label>Created Date</label>
+                    <input [(ngModel)]="project.created" name="projectCreated{{projectIndex}}" placeholder="22 Apr 2025">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Image URL</label>
+                  <input [(ngModel)]="project.image" name="projectImage{{projectIndex}}" placeholder="https://example.com/image.png">
+                </div>
+                
+                <div class="form-group">
+                  <label>Project Details Title</label>
+                  <input [(ngModel)]="project.detailsTitle" name="projectDetailsTitle{{projectIndex}}" placeholder="The services we provide for this project">
+                </div>
+                
+                <div class="form-group">
+                  <label>Project Description</label>
+                  <textarea [(ngModel)]="project.detailsDescription" name="projectDescription{{projectIndex}}" rows="3" placeholder="Detailed description of the project..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Technologies Used</label>
+                    <input [(ngModel)]="project.technologies" name="projectTech{{projectIndex}}" placeholder="html css javascript angular">
+                  </div>
+                  <div class="form-group">
+                    <label>Your Role</label>
+                    <input [(ngModel)]="project.role" name="projectRole{{projectIndex}}" placeholder="e.g. frontend, fullstack, designer">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="add-project-section">
+                <button class="btn-secondary" (click)="addProject()">➕ Add Project</button>
+                <button class="btn-primary" (click)="save()">💾 Save Projects</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Section -->
+          <div class="content-section" *ngIf="activeSection === 'experience'">
+            <h2>💼 Work Experience</h2>
+            <p>Detail your professional work history and achievements</p>
+            
+            <div class="experience-container">
+              <div class="experience-item" *ngFor="let exp of content.experience; let expIndex = index">
+                <div class="experience-header">
+                  <h3>{{exp.title || 'New Position'}}</h3>
+                  <button class="delete-btn" (click)="removeExperience(expIndex)" title="Remove Experience">🗑️</button>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Company / Organization</label>
+                    <input [(ngModel)]="exp.title" name="expTitle{{expIndex}}" placeholder="e.g. Copalopa Inc. (Sometown, NJ)">
+                  </div>
+                  <div class="form-group">
+                    <label>Job Title / Position</label>
+                    <input [(ngModel)]="exp.text" name="expText{{expIndex}}" placeholder="e.g. Lead / Senior UX Designer">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Employment Period</label>
+                  <input [(ngModel)]="exp.date" name="expDate{{expIndex}}" placeholder="e.g. 2018 - Present">
+                </div>
+              </div>
+              
+              <div class="add-experience-section">
+                <button class="btn-secondary" (click)="addExperience()">➕ Add Experience</button>
+                <button class="btn-primary" (click)="save()">💾 Save Experience</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education Section -->
+          <div class="content-section" *ngIf="activeSection === 'education'">
+            <h2>🎓 Education History</h2>
+            <p>Add your educational background and certifications</p>
+            
+            <div class="education-container">
+              <div class="education-item" *ngFor="let edu of content.education; let eduIndex = index">
+                <div class="education-header">
+                  <h3>{{edu.title || 'New Education'}}</h3>
+                  <button class="delete-btn" (click)="removeEducation(eduIndex)" title="Remove Education">🗑️</button>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Institution / School</label>
+                    <input [(ngModel)]="edu.title" name="eduTitle{{eduIndex}}" placeholder="e.g. XYZ University (Sometown, NJ)">
+                  </div>
+                  <div class="form-group">
+                    <label>Degree / Certificate</label>
+                    <input [(ngModel)]="edu.text" name="eduText{{eduIndex}}" placeholder="e.g. BFA in Graphic Design">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Study Period</label>
+                  <input [(ngModel)]="edu.date" name="eduDate{{eduIndex}}" placeholder="e.g. 2011 - 2013">
+                </div>
+              </div>
+              
+              <div class="add-education-section">
+                <button class="btn-secondary" (click)="addEducation()">➕ Add Education</button>
+                <button class="btn-primary" (click)="save()">💾 Save Education</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services Section -->
+          <div class="content-section" *ngIf="activeSection === 'services'">
+            <h2>⚙️ Services Offered</h2>
+            <p>List the professional services you provide to clients</p>
+            
+            <div class="services-container">
+              <div class="service-item" *ngFor="let service of content.services; let serviceIndex = index">
+                <div class="service-header">
+                  <h3>{{service.title || 'New Service'}}</h3>
+                  <button class="delete-btn" (click)="removeService(serviceIndex)" title="Remove Service">🗑️</button>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Service Title</label>
+                    <input [(ngModel)]="service.title" name="serviceTitle{{serviceIndex}}" placeholder="e.g. Web Designer">
+                  </div>
+                  <div class="form-group">
+                    <label>Icon Class</label>
+                    <input [(ngModel)]="service.icon" name="serviceIcon{{serviceIndex}}" placeholder="e.g. uil uil-web-grid">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Service Points</label>
+                  <div class="service-bullets">
+                    <div class="bullet-item" *ngFor="let bullet of service.bullets; let bulletIndex = index">
+                      <input [(ngModel)]="service.bullets[bulletIndex]" name="serviceBullet{{serviceIndex}}{{bulletIndex}}" placeholder="Service point...">
+                      <button class="delete-bullet-btn" (click)="removeBullet(serviceIndex, bulletIndex)" title="Remove Point">❌</button>
+                    </div>
+                    <button class="add-bullet-btn" (click)="addBullet(serviceIndex)">➕ Add Service Point</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="add-service-section">
+                <button class="btn-secondary" (click)="addService()">➕ Add Service</button>
+                <button class="btn-primary" (click)="save()">💾 Save Services</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+    </div> <!-- End dashboard-layout -->
+  </ng-container>
+
+  <!-- Success Toast -->
+  <div class="toast" *ngIf="saved" [class.show]="saved">
+    ✅ Changes saved successfully!
+  </div>
+</div>

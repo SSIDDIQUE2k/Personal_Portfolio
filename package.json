@@ -1,0 +1,19 @@
+{
+  "name": "ai-portfolio-agent",
+  "version": "1.0.0",
+  "description": "AI Portfolio Agent - Angular Portfolio with Admin CMS + Backend API",
+  "scripts": {
+    "ng": "cd ng-portfolio && npm run ng",
+    "start": "cd ng-portfolio && npm start",
+    "build": "cd ng-portfolio && npm run build",
+    "watch": "cd ng-portfolio && npm run watch",
+    "test": "cd ng-portfolio && npm test",
+    "install-deps": "cd ng-portfolio && npm install && cd ../backend && npm install",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:build": "cd backend && npm run build", 
+    "backend:start": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd ng-portfolio && npm start"
+  },
+  "private": true
+}

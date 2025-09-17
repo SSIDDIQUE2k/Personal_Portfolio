@@ -1,0 +1,155 @@
+<section id="contact" class="section" appRevealOnScroll>
+  <!-- Enhanced Floating Background Elements -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <h2 class="section-title" data-heading="Get in Touch">Contact me</h2>
+
+  <div class="contact-container container grid">
+    <!-- Contact Information -->
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3 class="info-title">Get in Touch</h3>
+        <div class="info-items">
+          <div class="info-item">
+            <div class="icon">
+              <i class="bi bi-envelope">✉</i>
+            </div>
+            <div class="details">
+              <div class="label">Email</div>
+              <div class="value">{{ c.email }}</div>
+              <a href="mailto:{{ c.email }}" class="contact-action">
+                Write me <span class="arrow-icon">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <i class="bi bi-telephone">📞</i>
+            </div>
+            <div class="details">
+              <div class="label">Phone</div>
+              <div class="value">{{ c.phone }}</div>
+              <a href="tel:{{ c.phone }}" class="contact-action">
+                Call me <span class="arrow-icon">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <i class="bi bi-geo-alt">📍</i>
+            </div>
+            <div class="details">
+              <div class="label">Location</div>
+              <div class="value">{{ c.location }}</div>
+              <a href="https://maps.google.com/?q={{ c.location }}" target="_blank" class="contact-action">
+                View map <span class="arrow-icon">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-content">
+      <div class="contact-form-section">
+        <h3 class="form-title">Send a Message</h3>
+        <form (ngSubmit)="submit()" class="contact-form">
+          <div class="form-row">
+            <div class="modern-input-group">
+              <div class="input-wrapper">
+                <i class="bi bi-person input-icon">👤</i>
+                <input 
+                  type="text" 
+                  id="firstName"
+                  name="firstName"
+                  [(ngModel)]="form.firstName" 
+                  placeholder="First Name"
+                  class="modern-input"
+                  required />
+                <span class="input-highlight"></span>
+              </div>
+            </div>
+            <div class="modern-input-group">
+              <div class="input-wrapper">
+                <i class="bi bi-person-check input-icon">👥</i>
+                <input 
+                  type="text" 
+                  id="lastName"
+                  name="lastName"
+                  [(ngModel)]="form.lastName" 
+                  placeholder="Last Name"
+                  class="modern-input"
+                  required />
+                <span class="input-highlight"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row full-width">
+            <div class="modern-input-group">
+              <div class="input-wrapper">
+                <i class="bi bi-envelope input-icon">✉</i>
+                <input 
+                  type="email" 
+                  id="email"
+                  name="email"
+                  [(ngModel)]="form.email" 
+                  placeholder="Email"
+                  class="modern-input"
+                  required />
+                <span class="input-highlight"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row full-width">
+            <div class="modern-input-group">
+              <div class="input-wrapper">
+                <i class="bi bi-telephone input-icon">📞</i>
+                <input 
+                  type="tel" 
+                  id="phone"
+                  name="phone"
+                  [(ngModel)]="form.phone" 
+                  placeholder="Phone"
+                  class="modern-input"
+                  required />
+                <span class="input-highlight"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row full-width">
+            <div class="modern-input-group">
+              <div class="input-wrapper message-wrapper">
+                <i class="bi bi-chat-dots input-icon">💬</i>
+                <textarea 
+                  id="message"
+                  name="message"
+                  rows="1"
+                  [(ngModel)]="form.message" 
+                  placeholder="Message"
+                  class="modern-input modern-textarea"
+                  required></textarea>
+                <span class="input-highlight"></span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="bi bi-send">📤</i>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
