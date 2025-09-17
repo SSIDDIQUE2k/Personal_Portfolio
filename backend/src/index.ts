@@ -12,7 +12,7 @@ import portfolioRoutes from './routes/portfolio';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 
 // Security middleware
 app.use(helmet({
@@ -54,6 +54,9 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static file serving for uploads
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Serve Angular static files
+app.use(express.static(path.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser')));
+
 // API routes
 app.use('/api/upload', uploadRoutes);
 app.use('/api/portfolio', portfolioRoutes);
@@ -76,9 +79,14 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// 404 handler for unmatched routes
-app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint not found' });
+// Catch-all handler: send back Angular's index.html file for SPA routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser/index.html'));
+});
+
+// 404 handler for API routes only
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ error: 'API endpoint not found' });
 });
 
 app.listen(PORT, () => {

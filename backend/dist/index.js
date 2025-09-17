@@ -14,7 +14,7 @@ const portfolio_1 = __importDefault(require("./routes/portfolio"));
 // Load environment variables
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 // Security middleware
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: { policy: "cross-origin" }
@@ -48,6 +48,8 @@ app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
 // Static file serving for uploads
 app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '../uploads')));
+// Serve Angular static files
+app.use(express_1.default.static(path_1.default.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser')));
 // API routes
 app.use('/api/upload', upload_1.default);
 app.use('/api/portfolio', portfolio_1.default);
@@ -67,9 +69,13 @@ app.use((err, req, res, next) => {
         message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
     });
 });
-// 404 handler for unmatched routes
-app.use((req, res) => {
-    res.status(404).json({ error: 'Endpoint not found' });
+// Catch-all handler: send back Angular's index.html file for SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '../../ng-portfolio/dist/ng-portfolio/browser/index.html'));
+});
+// 404 handler for API routes only
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: 'API endpoint not found' });
 });
 app.listen(PORT, () => {
     console.log(`🚀 Portfolio Backend Server running on port ${PORT}`);
