@@ -1,17 +1,10 @@
-<!-- Debug info - remove after fixing -->
-<div style="position: fixed; top: 10px; right: 10px; background: rgba(255,0,0,0.8); color: white; padding: 10px; z-index: 9999; border-radius: 5px; font-size: 12px;">
-  Debug: isAdminRoute = {{isAdminRoute}}<br>
-  Router URL: {{router.url}}<br>
-  Profile loaded: {{!!profile.name}}
-</div>
-
-<!-- Show router outlet for admin, portfolio content otherwise -->
-<div *ngIf="isAdminRoute">
+<!-- Show router outlet for admin route -->
+<div *ngIf="router.url === '/admin'" class="admin-container">
   <router-outlet></router-outlet>
 </div>
 
-<!-- Show portfolio content only for main route -->
-<div *ngIf="!isAdminRoute">
+<!-- Show portfolio content for all other routes -->
+<div *ngIf="router.url !== '/admin'" class="main-portfolio">
 
 <!-- Enhanced Morphing background shapes -->
 <div class="morphing-bg">

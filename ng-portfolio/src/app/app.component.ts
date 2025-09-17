@@ -29,21 +29,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // Load content from ContentService
     this.profile = this.contentService.load();
     
-    // Check if we're on admin route initially
-    this.updateRouteState();
-    
-    // Listen for route changes
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.updateRouteState();
-      
-      // Refresh content when navigating back from admin to main site
-      if (!this.isAdminRoute) {
-        this.refreshContent();
-      }
-    });
-
     // Listen for storage changes (when admin updates content)
     window.addEventListener('storage', (e) => {
       if (e.key === 'siteContent') {
@@ -51,10 +36,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.refreshContent();
       }
     });
-  }
-
-  private updateRouteState() {
-    this.isAdminRoute = this.router.url.includes('/admin');
   }
 
   refreshContent() {
@@ -119,8 +100,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('testimonialsSwiper') testimonialsSwiper!: ElementRef;
   @ViewChild('workContainer') workContainer!: ElementRef;
-
-  isAdminRoute = false;
 
   @HostListener('window:scroll')
   onScroll() {
