@@ -52,7 +52,11 @@ coverage/
 
 # Temporary files
 *.tmp
+<<<<<<< HEAD
 *.temp
 
 # Next.js
 .next/
+=======
+*.temp
+>>>>>>> 580c248c5fbdd0215a8ef57495fb4c79764c8e36
