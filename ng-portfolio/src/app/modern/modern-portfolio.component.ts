@@ -30,16 +30,16 @@ export class ModernPortfolioComponent implements OnInit, AfterViewInit, OnDestro
     // Listen for storage changes to update content in real-time
     window.addEventListener('storage', this.handleStorageChange);
     
-    // Also check for changes periodically (for same-tab updates)
+    // Check for changes less frequently (for same-tab updates)
     setInterval(() => {
       this.loadContent();
-    }, 2000);
+    }, 10000); // Reduced from 2s to 10s
   }
 
   private loadContent(): void {
     const newContent = this.content.load();
-    // Only update if content has actually changed
-    if (JSON.stringify(this.c) !== JSON.stringify(newContent)) {
+    // Only update if content has actually changed (optimized comparison)
+    if (this.hasContentChanged(this.c, newContent)) {
       console.log('Portfolio content updated, old image:', this.c.profileImage);
       console.log('Portfolio content updated, new image:', newContent.profileImage);
       // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
@@ -215,5 +215,15 @@ export class ModernPortfolioComponent implements OnInit, AfterViewInit, OnDestro
     console.log('Manual reload triggered');
     this.loadContent();
     console.log('Current content after manual reload:', this.c);
+  }
+
+  private hasContentChanged(oldContent: SiteContent, newContent: SiteContent): boolean {
+    // Fast comparison of key fields instead of full JSON stringify
+    return oldContent.name !== newContent.name ||
+           oldContent.title !== newContent.title ||
+           oldContent.profileImage !== newContent.profileImage ||
+           oldContent.about !== newContent.about ||
+           oldContent.skills?.length !== newContent.skills?.length ||
+           oldContent.projects?.length !== newContent.projects?.length;
   }
 }

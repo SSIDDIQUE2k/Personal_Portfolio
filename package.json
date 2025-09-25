@@ -20,7 +20,8 @@
     "backend:start": "cd backend && npm start",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd ng-portfolio && npm start",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "optimize-images": "NODE_PATH=./backend/node_modules node optimize-images.js"
   },
   "private": true
 }

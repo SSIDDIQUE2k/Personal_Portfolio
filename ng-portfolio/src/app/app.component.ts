@@ -156,8 +156,18 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.sidebarOpen = false;
   }
 
+  onNavClick(event: Event, section: string) {
+    event.preventDefault();
+    this.setActiveSection(section);
+  }
+
   setActiveSection(section: string) {
     this.activeSection = section;
+    // Smooth scroll to the section if it exists
+    const el = document.getElementById(section);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     this.closeSidebar();
   }
 

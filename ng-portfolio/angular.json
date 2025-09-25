@@ -62,7 +62,7 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -71,7 +71,9 @@
               "buildTarget": "ng-portfolio:build:production"
             },
             "development": {
-              "buildTarget": "ng-portfolio:build:development"
+              "buildTarget": "ng-portfolio:build:development",
+              "hmr": false,
+              "liveReload": true
             }
           },
           "defaultConfiguration": "development"

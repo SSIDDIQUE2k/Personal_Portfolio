@@ -1,601 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shazib Siddique - Portfolio</title>
-    
-    <!-- External Libraries -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --hue-color: 242;
-            --skin-color: hsl(342, 92%, 46%);
-            --mirage-color: hsl(210, 10%, 23%);
-            --title-color: hsl(var(--hue-color), 8%, 95%);
-            --text-color: hsl(var(--hue-color), 8%, 85%);
-            --body-color: hsl(var(--hue-color), 19%, 5%);
-            --box-color: hsl(var(--hue-color), 14%, 10%);
-            --scroll-box-color: hsl(var(--hue-color), 12%, 38%);
-            --scroll-thumb-color: hsl(var(--hue-color), 12%, 26%);
-            --body-font: 'Poppins', sans-serif;
-            --signature-font: 'Turret Road', sans-serif;
-            --biggest-font-size: 3rem;
-            --h1-font-size: 2.25rem;
-            --h2-font-size: 1.5rem;
-            --h3-font-size: 1.25rem;
-            --normal-font-size: 1rem;
-            --small-font-size: .875rem;
-            --smaller-font-size: .813rem;
-            --font-medium: 500;
-            --font-bold: 600;
-            --mb025: .25rem;
-            --mb05: .5rem;
-            --mb075: .75rem;
-            --mb1: 1rem;
-            --mb15: 1.5rem;
-            --mb2: 2rem;
-            --mb25: 2.5rem;
-            --mb3: 3rem;
-            --z-fixed: 10;
-            --z-modal: 100;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shazib Siddique - Portfolio</title>
+  <meta name="description" content="Shazib Siddique — Full Stack Developer portfolio showcasing projects, skills, and contact." />
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--body-font); font-size: var(--normal-font-size); background-color: var(--body-color); color: var(--text-color); }
-        h1, h2, h3 { color: var(--title-color); font-weight: var(--font-bold); }
-        ul { list-style: none; }
-        a { text-decoration: none; }
-        img { max-width: 100%; height: auto; }
-        button { cursor: pointer; border: none; outline: none; }
-        .container { max-width: 1250px; margin-left: auto; margin-right: auto; }
-        .grid { display: grid; }
-        
-        .button { 
-            display: inline-flex; 
-            align-items: center; 
-            column-gap: .5rem; 
-            background-color: var(--skin-color); 
-            color: var(--title-color); 
-            padding: 0.75rem 1.4rem; 
-            border-radius: .25rem; 
-            font-weight: var(--font-medium);
-            position: relative;
-            z-index: 1;
-            transition: .4s;
-        }
-        .button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220, 53, 99, 0.25); }
-        
-        .section { padding: 6.5rem 0 2rem; }
-        .section-title { text-align: center; font-size: var(--h1-font-size); margin-bottom: var(--mb3); }
-        .section-title::before { content: attr(data-heading); display: block; font-size: var(--normal-font-size); font-weight: var(--font-medium); color: var(--skin-color); }
+  <!-- External Libraries -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
 
-        /* Sidebar */
-        .sidebar { position: fixed; width: 100px; height: 100vh; background-color: var(--body-color); border-right: 1px solid var(--box-color); z-index: 10; }
-        .main { margin-left: 100px; }
-        .nav-logo { position: absolute; left: 0; right: 0; top: 1.8rem; width: 40px; height: 40px; border-radius: 50%; background-color: var(--skin-color); text-align: center; margin: auto; }
-        .nav-logo-text { font-size: 1.125rem; color: var(--title-color); font-weight: var(--font-bold); line-height: 40px; }
-        .nav-menu { position: fixed; transform: rotate(-90deg) translateX(-100%); transform-origin: left top; width: 100vh; }
-        .menu { display: flex; }
-        .nav-list { display: flex; flex-direction: row-reverse; margin: -2px auto 0 auto; }
-        .nav-link { float: right; height: 100%; line-height: 100px; padding: 0 1rem; color: var(--title-color); font-weight: var(--font-medium); position: relative; transition: .4s; }
-        .nav-link:hover, .active-link { color: var(--skin-color); }
+  <style>
+    :root{
+      --hue-color: 242;
+      --skin-color: hsl(342, 92%, 46%);
+      --mirage-color: hsl(210, 10%, 23%);
+      --title-color: hsl(var(--hue-color), 8%, 95%);
+      --text-color: hsl(var(--hue-color), 8%, 85%);
+      --body-color: hsl(var(--hue-color), 19%, 5%);
+      --box-color: hsl(var(--hue-color), 14%, 10%);
+      --scroll-box-color: hsl(var(--hue-color), 12%, 38%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 26%);
+      --body-font: 'Poppins', sans-serif;
+      --signature-font: 'Turret Road', sans-serif;
+      --biggest-font-size: 3rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size: 1.5rem;
+      --h3-font-size: 1.25rem;
+      --normal-font-size: 1rem;
+      --small-font-size: .875rem;
+      --smaller-font-size: .813rem;
+      --font-medium: 500;
+      --font-bold: 600;
+      --mb025: .25rem;
+      --mb05: .5rem;
+      --mb075: .75rem;
+      --mb1: 1rem;
+      --mb15: 1.5rem;
+      --mb2: 2rem;
+      --mb25: 2.5rem;
+      --mb3: 3rem;
+      --z-fixed: 10;
+      --z-modal: 100;
+    }
 
-        /* Nav Toggle */
-        .nav-toggle {
-            height: 32px;
-            width: 36px;
-            cursor: pointer;
-            position: fixed;
-            right: 1.5rem;
-            top: 2rem;
-            font-size: 1.2rem;
-            border-radius: .25rem;
-            background-color: var(--skin-color);
-            color: var(--title-color);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: var(--z-fixed);
-            transition: .4s;
-        }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--body-font);font-size:var(--normal-font-size);background-color:var(--body-color);color:var(--text-color)}
+    h1,h2,h3{color:var(--title-color);font-weight:var(--font-bold)}
+    ul{list-style:none}
+    a{text-decoration:none}
+    img{max-width:100%;height:auto}
+    button{cursor:pointer;border:none;outline:none}
+    .container{max-width:1250px;margin-left:auto;margin-right:auto}
+    .grid{display:grid}
 
-        /* Home Section */
-        .home {
-            min-height: 100vh;
-            position: relative;
-            margin-bottom: 0;
-            border-bottom: 3px solid rgba(220, 53, 99, 0.3);
-            background: linear-gradient(135deg, 
-                rgba(15, 23, 42, 0.95) 0%, 
-                rgba(30, 41, 59, 0.9) 50%, 
-                rgba(15, 23, 42, 0.95) 100%);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
+    /* focus styles for keyboard users */
+    :focus-visible{outline:2px solid var(--skin-color);outline-offset:2px;border-radius:.25rem}
 
-        .home-container { 
-            grid-template-columns: 1fr 400px; 
-            column-gap: 4rem; 
-            align-items: center; 
-            padding: 0 2rem;
-        }
+    .button{
+      display:inline-flex;align-items:center;column-gap:.5rem;background-color:var(--skin-color);
+      color:var(--title-color);padding:.75rem 1.4rem;border-radius:.25rem;font-weight:var(--font-medium);
+      position:relative;z-index:1;transition:.25s transform, .25s box-shadow;
+    }
+    .button:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,53,99,.25)}
 
-        .home-title { font-size: var(--biggest-font-size); margin-bottom: var(--mb1); }
-        .name-highlight { color: var(--skin-color); }
-        .home-subtitle { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb075); }
-        .home-description { max-width: 450px; margin-bottom: var(--mb2); line-height: 1.6; }
+    .section{padding:6.5rem 0 2rem}
+    .section-title{text-align:center;font-size:var(--h1-font-size);margin-bottom:var(--mb3)}
+    .section-title::before{content:attr(data-heading);display:block;font-size:var(--normal-font-size);font-weight:var(--font-medium);color:var(--skin-color)}
 
-        .home-img-container {
-            width: 400px;
-            height: 500px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
+    /* Sidebar */
+    .sidebar{position:fixed;width:100px;height:100vh;background-color:var(--body-color);border-right:1px solid var(--box-color);z-index:var(--z-fixed);left:0;top:0;transition:transform .3s ease}
+    .main{margin-left:100px}
+    .nav-logo{position:absolute;left:0;right:0;top:1.8rem;width:40px;height:40px;border-radius:50%;background-color:var(--skin-color);text-align:center;margin:auto}
+    .nav-logo-text{font-size:1.125rem;color:var(--title-color);font-weight:var(--font-bold);line-height:40px}
+    .nav-menu{position:fixed;transform:rotate(-90deg) translateX(-100%);transform-origin:left top;width:100vh}
+    .menu{display:flex}
+    .nav-list{display:flex;flex-direction:row-reverse;margin:-2px auto 0 auto}
+    .nav-link{float:right;height:100%;line-height:100px;padding:0 1rem;color:var(--title-color);font-weight:var(--font-medium);position:relative;transition:color .25s}
+    .nav-link:hover,.active-link{color:var(--skin-color)}
 
-        .home-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            object-fit: cover;
-            border: 3px solid var(--skin-color);
-        }
+    /* Nav Toggle */
+    .nav-toggle{
+      height:36px;width:40px;cursor:pointer;position:fixed;right:1rem;top:1rem;font-size:1.2rem;border-radius:.4rem;
+      background-color:var(--skin-color);color:var(--title-color);display:none;align-items:center;justify-content:center;
+      z-index:var(--z-modal);transition:background-color .25s
+    }
 
-        .placeholder-image {
-            background: var(--box-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-color);
-            font-size: 2rem;
-        }
+    /* Home Section */
+    .home{
+      min-height:100vh;position:relative;margin-bottom:0;border-bottom:3px solid rgba(220,53,99,.3);
+      background:linear-gradient(135deg, rgba(15,23,42,.95) 0%, rgba(30,41,59,.9) 50%, rgba(15,23,42,.95) 100%);
+      overflow:hidden;display:flex;align-items:center
+    }
+    .home-container{grid-template-columns:1fr 400px;column-gap:4rem;align-items:center;padding:0 2rem}
+    .home-title{font-size:var(--biggest-font-size);margin-bottom:var(--mb1)}
+    .name-highlight{color:var(--skin-color)}
+    .home-subtitle{font-size:var(--h3-font-size);font-weight:var(--font-medium);margin-bottom:var(--mb075)}
+    .home-description{max-width:450px;margin-bottom:var(--mb2);line-height:1.6}
+    .home-img-container{width:400px;height:500px;position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto}
+    .home-img{width:100%;height:100%;border-radius:15px;object-fit:cover;border:3px solid var(--skin-color)}
+    .placeholder-image{background:var(--box-color);display:flex;align-items:center;justify-content:center;color:var(--text-color);font-size:2rem}
 
-        /* Social Links */
-        .home-social {
-            position: absolute;
-            left: 2rem;
-            bottom: 2rem;
-        }
-        .home-social-follow { 
-            writing-mode: vertical-lr; 
-            color: var(--text-color); 
-            font-size: var(--small-font-size); 
-            margin-bottom: 1rem; 
-        }
-        .home-social-links { display: flex; flex-direction: column; gap: 1rem; }
-        .home-social-link { 
-            font-size: 1.2rem; 
-            color: var(--text-color); 
-            transition: .4s; 
-        }
-        .home-social-link:hover { color: var(--skin-color); transform: translateX(.25rem); }
+    /* Social Links */
+    .home-social{position:absolute;left:2rem;bottom:2rem}
+    .home-social-follow{writing-mode:vertical-lr;color:var(--text-color);font-size:var(--small-font-size);margin-bottom:1rem}
+    .home-social-links{display:flex;flex-direction:column;gap:1rem}
+    .home-social-link{font-size:1.2rem;color:var(--text-color);transition:transform .25s,color .25s}
+    .home-social-link:hover{color:var(--skin-color);transform:translateX(.25rem)}
 
-        /* About Section */
-        .about-container { grid-template-columns: repeat(2, 1fr); column-gap: 4rem; align-items: center; }
-        .about-heading { font-size: var(--h3-font-size); margin-bottom: var(--mb075); }
-        .about-description { text-align: justify; padding-right: 6rem; margin-bottom: var(--mb2); line-height: 1.6; }
+    /* About */
+    .about-container{grid-template-columns:repeat(2,1fr);column-gap:4rem;align-items:center}
+    .about-heading{font-size:var(--h3-font-size);margin-bottom:var(--mb075)}
+    .about-description{text-align:justify;padding-right:6rem;margin-bottom:var(--mb2);line-height:1.6}
 
-        /* Skills Section */
-        .skills-container { grid-template-columns: repeat(3, 1fr); column-gap: 2rem; }
-        .skills-content { background-color: var(--box-color); padding: 2rem; border-radius: .5rem; text-align: center; }
-        .skills-icon { font-size: 2rem; color: var(--skin-color); margin-bottom: var(--mb1); }
-        .skills-title { font-size: var(--h3-font-size); margin-bottom: var(--mb05); }
-        .skills-subtitle { font-size: var(--small-font-size); color: var(--text-color); }
+    /* Skills */
+    .skills-container{grid-template-columns:repeat(3,1fr);column-gap:2rem}
+    .skills-content{background-color:var(--box-color);padding:2rem;border-radius:.5rem;text-align:center}
+    .skills-icon{font-size:2rem;color:var(--skin-color);margin-bottom:var(--mb1)}
+    .skills-title{font-size:var(--h3-font-size);margin-bottom:var(--mb05)}
+    .skills-subtitle{font-size:var(--small-font-size);color:var(--text-color)}
 
-        /* Projects Section */
-        .projects-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .project-card {
-            background-color: var(--box-color);
-            border-radius: .5rem;
-            overflow: hidden;
-            transition: .4s;
-        }
-        .project-card:hover { transform: translateY(-5px); }
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .project-content { padding: 1.5rem; }
-        .project-title { font-size: var(--h3-font-size); margin-bottom: var(--mb05); }
-        .project-description { font-size: var(--small-font-size); margin-bottom: var(--mb1); line-height: 1.6; }
+    /* Projects */
+    .projects-container{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+    .project-card{background-color:var(--box-color);border-radius:.5rem;overflow:hidden;transition:transform .25s}
+    .project-card:hover{transform:translateY(-5px)}
+    .project-img{width:100%;height:200px;object-fit:cover}
+    .project-content{padding:1.5rem}
+    .project-title{font-size:var(--h3-font-size);margin-bottom:var(--mb05)}
+    .project-description{font-size:var(--small-font-size);margin-bottom:var(--mb1);line-height:1.6}
 
-        /* Services Section */
-        .services-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .service-card {
-            background-color: var(--box-color);
-            padding: 2rem;
-            border-radius: .5rem;
-            text-align: center;
-            transition: .4s;
-        }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-icon { font-size: 2rem; color: var(--skin-color); margin-bottom: var(--mb1); }
-        .service-title { font-size: var(--h3-font-size); margin-bottom: var(--mb1); }
-        .service-description { font-size: var(--small-font-size); line-height: 1.6; }
+    /* Services */
+    .services-container{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+    .service-card{background-color:var(--box-color);padding:2rem;border-radius:.5rem;text-align:center;transition:transform .25s}
+    .service-card:hover{transform:translateY(-5px)}
+    .service-icon{font-size:2rem;color:var(--skin-color);margin-bottom:var(--mb1)}
+    .service-title{font-size:var(--h3-font-size);margin-bottom:var(--mb1)}
+    .service-description{font-size:var(--small-font-size);line-height:1.6}
 
-        /* Contact Section */
-        .contact-container { grid-template-columns: repeat(2, 1fr); column-gap: 4rem; align-items: start; }
-        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .contact-icon { font-size: 1.5rem; color: var(--skin-color); }
-        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-label { margin-bottom: .5rem; color: var(--title-color); }
-        .form-input, .form-textarea {
-            padding: 1rem;
-            border: 1px solid var(--box-color);
-            border-radius: .5rem;
-            background-color: var(--box-color);
-            color: var(--text-color);
-            font-family: var(--body-font);
-        }
-        .form-textarea { resize: vertical; min-height: 120px; }
+    /* Contact */
+    .contact-container{grid-template-columns:repeat(2,1fr);column-gap:4rem;align-items:start}
+    .contact-info{display:flex;flex-direction:column;gap:1.5rem}
+    .contact-item{display:flex;align-items:center;gap:1rem}
+    .contact-icon{font-size:1.5rem;color:var(--skin-color)}
+    .contact-form{display:flex;flex-direction:column;gap:1rem}
+    .form-group{display:flex;flex-direction:column}
+    .form-label{margin-bottom:.5rem;color:var(--title-color)}
+    .form-input,.form-textarea{
+      padding:1rem;border:1px solid var(--box-color);border-radius:.5rem;background-color:var(--box-color);color:var(--text-color);font-family:var(--body-font)
+    }
+    .form-textarea{resize:vertical;min-height:120px}
 
-        /* Responsive */
-        @media screen and (max-width: 1024px) {
-            .container { margin-left: var(--mb15); margin-right: var(--mb15); }
-            .sidebar { width: 100%; z-index: 999; transform: translateX(-100%); }
-            .show-sidebar { transform: translateX(0); }
-            .main { margin-left: 0; }
-            .nav-toggle { display: flex; }
-            .nav-menu { height: 100%; width: 100%; transform: rotate(0deg) translateX(0); display: flex; justify-content: center; }
-            .nav-list { flex-direction: column; height: 100%; justify-content: center; align-items: center; }
-            .nav-link { padding: 1rem 0; line-height: 1.5; }
-            .home-container { grid-template-columns: 1fr; text-align: center; }
-            .home-img-container { width: 300px; height: 400px; margin-top: 2rem; }
-            .about-container { grid-template-columns: 1fr; text-align: center; }
-            .about-description { padding-right: 0; }
-            .skills-container { grid-template-columns: repeat(2, 1fr); }
-            .contact-container { grid-template-columns: 1fr; }
-        }
+    /* Responsive */
+    @media (max-width:1024px){
+      .container{margin-left:var(--mb15);margin-right:var(--mb15)}
+      .sidebar{width:100%;transform:translateX(-100%);left:0;right:0;height:100vh}
+      .sidebar.show-sidebar{transform:translateX(0)}
+      .main{margin-left:0}
+      .nav-toggle{display:flex}
+      .nav-menu{height:100%;width:100%;transform:none;display:flex;justify-content:center;position:static;margin-top:5rem}
+      .nav-list{flex-direction:column;height:100%;justify-content:center;align-items:center;gap:1rem}
+      .nav-link{padding:1rem 0;line-height:1.5}
+      .home-container{grid-template-columns:1fr;text-align:center}
+      .home-img-container{width:300px;height:400px;margin-top:2rem}
+      .about-container{grid-template-columns:1fr;text-align:center}
+      .about-description{padding-right:0}
+      .skills-container{grid-template-columns:repeat(2,1fr)}
+      .contact-container{grid-template-columns:1fr}
+    }
+    @media (max-width:768px){
+      .skills-container{grid-template-columns:1fr}
+      .home-img-container{width:250px;height:300px}
+      .section{padding:5rem 0 2rem}
+    }
 
-        @media screen and (max-width: 768px) {
-            .skills-container { grid-template-columns: 1fr; }
-            .home-img-container { width: 250px; height: 300px; }
-        }
-    </style>
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .button,.project-card,.service-card,.home-social-link{transition:none}
+    }
+  </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <nav class="nav">
-            <div class="nav-logo">
-                <a href="#home" class="nav-logo-text">S</a>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary">
+    <nav class="nav" aria-label="Main">
+      <div class="nav-logo">
+        <a href="#home" class="nav-logo-text" aria-label="Go to Home">S</a>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <div class="menu">
+          <ul class="nav-list" role="list">
+            <li class="nav-item"><a href="#home" class="nav-link active-link">Home</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Nav Toggle -->
+  <button class="nav-toggle" id="nav-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation">
+    <i class="uil uil-bars" aria-hidden="true"></i>
+  </button>
+
+  <main class="main" id="main">
+    <!-- Home -->
+    <section class="home section" id="home">
+      <!-- Social Links -->
+      <div class="home-social" aria-label="Social links">
+        <span class="home-social-follow">FOLLOW</span>
+        <div class="home-social-links">
+          <a href="https://github.com" class="home-social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="uil uil-github-alt" aria-hidden="true"></i>
+          </a>
+          <a href="https://linkedin.com" class="home-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="uil uil-linkedin-alt" aria-hidden="true"></i>
+          </a>
+          <a href="https://twitter.com" class="home-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+            <i class="uil uil-twitter" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-container container grid">
+        <div class="home-content">
+          
+          <h3 class="home-subtitle">Full Stack Developer</h3>
+          <p class="home-description">
+            I'm a passionate developer with expertise in modern web technologies,
+            creating dynamic and responsive web applications with great user experiences.
+          </p>
+          <a href="#about" class="button">
+            <i class="uil uil-user button-icon" aria-hidden="true"></i>
+            More About Me
+          </a>
+        </div>
+
+        <div class="home-img-container" aria-hidden="true">
+          <div class="placeholder-image home-img">
+            <i class="uil uil-user"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title" data-heading="My Intro">About Me</h2>
+      <div class="about-container container grid">
+        <div class="about-content">
+          <h3 class="about-heading">I'm a Full Stack Developer</h3>
+          <p class="about-description">
+            With over 4 years of experience in web development, I specialize in creating
+            modern, scalable applications using the latest technologies. I'm passionate
+            about clean code, user experience, and continuous learning.
+          </p>
+          <a href="#contact" class="button">
+            <i class="uil uil-message button-icon" aria-hidden="true"></i>
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills section" id="skills" aria-labelledby="skills-title">
+      <h2 class="section-title" id="skills-title" data-heading="My Abilities">My Experience</h2>
+      <div class="skills-container container grid">
+        <div class="skills-content">
+          <i class="uil uil-brackets-curly skills-icon" aria-hidden="true"></i>
+          <h3 class="skills-title">Frontend Developer</h3>
+          <span class="skills-subtitle">More than 4 years</span>
+        </div>
+        <div class="skills-content">
+          <i class="uil uil-palette skills-icon" aria-hidden="true"></i>
+          <h3 class="skills-title">UI / UX Design</h3>
+          <span class="skills-subtitle">More than 5 years</span>
+        </div>
+        <div class="skills-content">
+          <i class="uil uil-server-network skills-icon" aria-hidden="true"></i>
+          <h3 class="skills-title">Backend Developer</h3>
+          <span class="skills-subtitle">More than 2 years</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects section" id="projects" aria-labelledby="projects-title">
+      <h2 class="section-title" id="projects-title" data-heading="My Portfolio">Recent Works</h2>
+      <div class="projects-container container grid">
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+1" alt="Screenshot of Project 1" class="project-img">
+          <div class="project-content">
+            <h3 class="project-title">Modern Web App</h3>
+            <p class="project-description">A full-stack web application with authentication and real-time updates.</p>
+            <a href="#" class="button" aria-label="View Project 1">
+              <i class="uil uil-arrow-right button-icon" aria-hidden="true"></i>
+              View Project
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+2" alt="Screenshot of Project 2" class="project-img">
+          <div class="project-content">
+            <h3 class="project-title">E-commerce Platform</h3>
+            <p class="project-description">Payments, inventory management, and an admin dashboard.</p>
+            <a href="#" class="button" aria-label="View Project 2">
+              <i class="uil uil-arrow-right button-icon" aria-hidden="true"></i>
+              View Project
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+3" alt="Screenshot of Project 3" class="project-img">
+          <div class="project-content">
+            <h3 class="project-title">Task Management App</h3>
+            <p class="project-description">Collaboration, progress tracking, and notifications.</p>
+            <a href="#" class="button" aria-label="View Project 3">
+              <i class="uil uil-arrow-right button-icon" aria-hidden="true"></i>
+              View Project
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services section" id="services" aria-labelledby="services-title">
+      <h2 class="section-title" id="services-title" data-heading="Services">What I Offer</h2>
+      <div class="services-container container grid">
+        <div class="service-card">
+          <i class="uil uil-web-grid service-icon" aria-hidden="true"></i>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-description">Responsive, modern websites using best practices for performance.</p>
+        </div>
+
+        <div class="service-card">
+          <i class="uil uil-mobile-android service-icon" aria-hidden="true"></i>
+          <h3 class="service-title">Mobile Apps</h3>
+          <p class="service-description">Cross-platform apps with native-like performance and intuitive UI.</p>
+        </div>
+
+        <div class="service-card">
+          <i class="uil uil-edit service-icon" aria-hidden="true"></i>
+          <h3 class="service-title">UI/UX Design</h3>
+          <p class="service-description">User-centered design that looks great and meets business goals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title" data-heading="Get In Touch">Contact Me</h2>
+      <div class="contact-container container grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="uil uil-envelope contact-icon" aria-hidden="true"></i>
+            <div>
+              <h3>Email</h3>
+              <p><a href="mailto:siddiqueshazib4@gmail.com">siddiqueshazib4@gmail.com</a></p>
             </div>
+          </div>
 
-            <div class="nav-menu">
-                <div class="menu">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="#home" class="nav-link active-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#about" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#skills" class="nav-link">Skills</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#projects" class="nav-link">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#services" class="nav-link">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#contact" class="nav-link">Contact</a>
-                        </li>
-                    </ul>
-                </div>
+          <div class="contact-item">
+            <i class="uil uil-phone contact-icon" aria-hidden="true"></i>
+            <div>
+              <h3>Phone</h3>
+              <p><a href="tel:+15551234567">+1 (555) 123-4567</a></p>
             </div>
-        </nav>
-    </aside>
+          </div>
 
-    <!-- Nav Toggle -->
-    <div class="nav-toggle" id="nav-toggle">
-        <i class="uil uil-bars"></i>
-    </div>
-
-    <main class="main">
-        <!-- Home Section -->
-        <section class="home section" id="home">
-            <!-- Social Links -->
-            <div class="home-social">
-                <span class="home-social-follow">FOLLOW</span>
-                <div class="home-social-links">
-                    <a href="https://github.com" target="_blank" class="home-social-link">
-                        <i class="uil uil-github-alt"></i>
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" class="home-social-link">
-                        <i class="uil uil-linkedin-alt"></i>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" class="home-social-link">
-                        <i class="uil uil-twitter"></i>
-                    </a>
-                </div>
+          <div class="contact-item">
+            <i class="uil uil-map-marker contact-icon" aria-hidden="true"></i>
+            <div>
+              <h3>Location</h3>
+              <p>New York, USA</p>
             </div>
+          </div>
+        </div>
 
-            <div class="home-container container grid">
-                <div class="home-content">
-                    <h1 class="home-title">
-                        Hi, I'm <span class="name-highlight">Shazib Siddique</span>
-                    </h1>
-                    <h3 class="home-subtitle">Full Stack Developer</h3>
-                    <p class="home-description">
-                        I'm a passionate developer with expertise in modern web technologies, 
-                        creating dynamic and responsive web applications with great user experiences.
-                    </p>
-                    <a href="#about" class="button">
-                        <i class="uil uil-user button-icon"></i>
-                        More About Me
-                    </a>
-                </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-input" required autocomplete="name">
+          </div>
 
-                <div class="home-img-container">
-                    <div class="placeholder-image home-img">
-                        <i class="uil uil-user"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" required autocomplete="email" inputmode="email">
+          </div>
 
-        <!-- About Section -->
-        <section class="about section" id="about">
-            <h2 class="section-title" data-heading="My Intro">About Me</h2>
-            
-            <div class="about-container container grid">
-                <div class="about-content">
-                    <h3 class="about-heading">I'm a Full Stack Developer</h3>
-                    <p class="about-description">
-                        With over 4 years of experience in web development, I specialize in creating 
-                        modern, scalable applications using the latest technologies. I'm passionate 
-                        about clean code, user experience, and continuous learning.
-                    </p>
-                    <a href="#contact" class="button">
-                        <i class="uil uil-message button-icon"></i>
-                        Contact Me
-                    </a>
-                </div>
-            </div>
-        </section>
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-textarea" required></textarea>
+          </div>
 
-        <!-- Skills Section -->
-        <section class="skills section" id="skills">
-            <h2 class="section-title" data-heading="My Abilities">My Experience</h2>
-            
-            <div class="skills-container container grid">
-                <div class="skills-content">
-                    <i class="uil uil-brackets-curly skills-icon"></i>
-                    <h3 class="skills-title">Frontend Developer</h3>
-                    <span class="skills-subtitle">More than 4 years</span>
-                </div>
+          <button type="submit" class="button">
+            <i class="uil uil-message button-icon" aria-hidden="true"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
 
-                <div class="skills-content">
-                    <i class="uil uil-palette skills-icon"></i>
-                    <h3 class="skills-title">UI / UX Design</h3>
-                    <span class="skills-subtitle">More than 5 years</span>
-                </div>
+  <script>
+    // Elements
+    const navToggle = document.getElementById('nav-toggle');
+    const sidebar   = document.getElementById('sidebar');
+    const navLinks  = document.querySelectorAll('.nav-link');
+    const sections  = document.querySelectorAll('section[id]');
 
-                <div class="skills-content">
-                    <i class="uil uil-server-network skills-icon"></i>
-                    <h3 class="skills-title">Backend Developer</h3>
-                    <span class="skills-subtitle">More than 2 years</span>
-                </div>
-            </div>
-        </section>
+    // Toggle sidebar (mobile)
+    function setExpanded(isOpen){
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    }
+    navToggle.addEventListener('click', () => {
+      const opening = !sidebar.classList.contains('show-sidebar');
+      sidebar.classList.toggle('show-sidebar');
+      setExpanded(opening);
+    });
+    // Keyboard toggle
+    navToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        navToggle.click();
+      }
+    });
 
-        <!-- Projects Section -->
-        <section class="projects section" id="projects">
-            <h2 class="section-title" data-heading="My Portfolio">Recent Works</h2>
-            
-            <div class="projects-container container grid">
-                <div class="project-card">
-                    <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+1" alt="Project 1" class="project-img">
-                    <div class="project-content">
-                        <h3 class="project-title">Modern Web App</h3>
-                        <p class="project-description">
-                            A full-stack web application built with modern technologies 
-                            featuring user authentication and real-time updates.
-                        </p>
-                        <a href="#" class="button">
-                            <i class="uil uil-arrow-right button-icon"></i>
-                            View Project
-                        </a>
-                    </div>
-                </div>
+    // Close sidebar on link click (mobile)
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
 
-                <div class="project-card">
-                    <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+2" alt="Project 2" class="project-img">
-                    <div class="project-content">
-                        <h3 class="project-title">E-commerce Platform</h3>
-                        <p class="project-description">
-                            A comprehensive e-commerce solution with payment integration, 
-                            inventory management, and admin dashboard.
-                        </p>
-                        <a href="#" class="button">
-                            <i class="uil uil-arrow-right button-icon"></i>
-                            View Project
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="https://via.placeholder.com/400x200/1a202c/dc3563?text=Project+3" alt="Project 3" class="project-img">
-                    <div class="project-content">
-                        <h3 class="project-title">Task Management App</h3>
-                        <p class="project-description">
-                            A collaborative task management application with team features, 
-                            progress tracking, and notifications.
-                        </p>
-                        <a href="#" class="button">
-                            <i class="uil uil-arrow-right button-icon"></i>
-                            View Project
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section class="services section" id="services">
-            <h2 class="section-title" data-heading="Services">What I Offer</h2>
-            
-            <div class="services-container container grid">
-                <div class="service-card">
-                    <i class="uil uil-web-grid service-icon"></i>
-                    <h3 class="service-title">Web Development</h3>
-                    <p class="service-description">
-                        Creating responsive and modern websites using the latest technologies 
-                        and best practices for optimal performance.
-                    </p>
-                </div>
-
-                <div class="service-card">
-                    <i class="uil uil-mobile-android service-icon"></i>
-                    <h3 class="service-title">Mobile Apps</h3>
-                    <p class="service-description">
-                        Developing cross-platform mobile applications with native performance 
-                        and intuitive user interfaces.
-                    </p>
-                </div>
-
-                <div class="service-card">
-                    <i class="uil uil-edit service-icon"></i>
-                    <h3 class="service-title">UI/UX Design</h3>
-                    <p class="service-description">
-                        Designing user-centered interfaces that provide excellent user experience 
-                        and achieve business goals.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact section" id="contact">
-            <h2 class="section-title" data-heading="Get In Touch">Contact Me</h2>
-            
-            <div class="contact-container container grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="uil uil-envelope contact-icon"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>siddiqueshazib4@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="uil uil-phone contact-icon"></i>
-                        <div>
-                            <h3>Phone</h3>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="uil uil-map-marker contact-icon"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>New York, USA</p>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-textarea" required></textarea>
-                    </div>
-
-                    <button type="submit" class="button">
-                        <i class="uil uil-message button-icon"></i>
-                        Send Message
-                    </button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        // Navigation functionality
-        const navToggle = document.getElementById('nav-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        navToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('show-sidebar');
-        });
-
-        // Active link functionality
-        const sections = document.querySelectorAll('section[id]');
-
-        function scrollActive() {
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(current => {
-                const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 50;
-                const sectionId = current.getAttribute('id');
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelector('.nav-link[href*=' + sectionId + ']').classList.add('active-link');
-                } else {
-                    document.querySelector('.nav-link[href*=' + sectionId + ']').classList.remove('active-link');
-                }
-            });
+        if (targetSection) {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            targetSection.scrollIntoView();
+          } else {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
+        if (window.innerWidth <= 1024) {
+          sidebar.classList.remove('show-sidebar');
+          setExpanded(false);
+        }
+      });
+    });
 
-        window.addEventListener('scroll', scrollActive);
+    // Active link on scroll — defensive + efficient
+    let ticking = false;
+    function handleScroll(){
+      if (!ticking){
+        window.requestAnimationFrame(() => {
+          const scrollY = window.pageYOffset;
+          sections.forEach(section => {
+            const rectTop   = section.getBoundingClientRect().top + window.scrollY;
+            const sectionTop = rectTop - 80; // offset for comfort
+            const sectionId  = section.getAttribute('id');
+            const inView = scrollY >= sectionTop && scrollY < sectionTop + section.offsetHeight;
 
-        // Contact form
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
+            const link = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            if (link) {
+              if (inView) link.classList.add('active-link');
+              else link.classList.remove('active-link');
+            }
+          });
+          ticking = false;
         });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once on load
+    handleScroll();
 
-        // Smooth scrolling for navigation links
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+    // Contact form (basic UX)
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
 
-                // Close sidebar on mobile after clicking
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('show-sidebar');
-                }
-            });
-        });
-    </script>
+      if (!name || !email || !message){
+        alert('Please complete all fields.');
+        return;
+      }
+      // In production, POST to your backend or a service like Formspree
+      alert('Thank you for your message! I will get back to you soon.');
+      form.reset();
+    });
+
+    // Close sidebar if viewport grows > 1024 after being open
+    const mq = window.matchMedia('(min-width: 1025px)');
+    mq.addEventListener('change', (ev) => {
+      if (ev.matches) {
+        sidebar.classList.remove('show-sidebar');
+        setExpanded(false);
+      }
+    });
+  </script>
 </body>
 </html>
