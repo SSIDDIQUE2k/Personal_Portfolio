@@ -26,7 +26,7 @@ export interface UploadProgress {
   providedIn: 'root'
 })
 export class UploadService {
-  private readonly API_URL = 'http://localhost:3002/api';
+  private readonly API_URL = '/api';
   private uploadProgressSubject = new BehaviorSubject<UploadProgress>({
     progress: 0,
     uploading: false,
